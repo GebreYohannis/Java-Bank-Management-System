@@ -31,7 +31,7 @@ public class CheckingAAccount extends BankAccount{
     }
 
     @Override
-    public void accountType() {
-        System.out.println("Account Type: Checking");
+    public String accountType() {
+       return "Checking";
     }
 }

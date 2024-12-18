@@ -1,5 +1,9 @@
 package BankSystem.Transactions;
 
+import java.text.NumberFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import BankSystem.Accounts.BankAccount;
 import BankSystem.Exceptions.NegativeAmountException;
 
@@ -19,6 +23,12 @@ public class DepositTransaction implements Transaction {
 
     @Override
     public String getDetails() {
-        return "Deposit of  " + amount + " to account " + account.getAccountNumber();
+        LocalDateTime dateTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yy HH:mm:ss");
+        String formattedDateTime = formatter.format(dateTime);
+
+        String formattedAmount = NumberFormat.getCurrencyInstance().format(amount);
+        return ("Deposit of  " + formattedAmount + " to account " +
+                account.getAccountNumber() + " on " + formattedDateTime);
     }
 }

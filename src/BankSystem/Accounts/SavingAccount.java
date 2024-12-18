@@ -31,8 +31,8 @@ public class SavingAccount extends BankAccount{
     }
 
     @Override
-    public void accountType() {
-        System.out.println("Account Type: Saving");
+    public String accountType() {
+        return "Saving";
     }
 
     public void addInterest() {
