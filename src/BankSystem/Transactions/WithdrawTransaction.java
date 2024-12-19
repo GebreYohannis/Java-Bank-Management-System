@@ -1,5 +1,9 @@
 package BankSystem.Transactions;
 
+import java.text.NumberFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import BankSystem.Accounts.BankAccount;
 import BankSystem.Exceptions.InsufficientBalanceException;
 import BankSystem.Exceptions.NegativeAmountException;
@@ -21,6 +25,12 @@ public class WithdrawTransaction implements Transaction {
 
     @Override
     public String getDetails() {
-        return "Withdrew of " + amount + " from account " + account.getAccountNumber();
+        LocalDateTime dateTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yy HH:mm:ss");
+        String formattedDateTime = formatter.format(dateTime);
+
+        String formattedAmount = NumberFormat.getCurrencyInstance().format(amount);
+        return "Withdrew of " + formattedAmount + " from account " +
+                account.getAccountNumber() + " on " + formattedDateTime;
     }
 }
