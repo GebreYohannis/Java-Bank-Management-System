@@ -14,8 +14,7 @@ public class Main {
             System.out.println("1. Register");
             System.out.println("2. Login");
             System.out.println("3. Check Account");
-            System.out.println("4. Logout");
-            System.out.println("5. Exit");
+            System.out.println("4. Exit");
 
             System.out.print("Choice: ");
             int choice = scanner.nextInt();
@@ -36,9 +35,6 @@ public class Main {
                 checkAccount();
                 break;
             case 4:
-                logout();
-                break;
-            case 5:
                 System.out.println("Exiting the system ....");
                 scanner.close();
                 return true;
@@ -72,12 +68,26 @@ public class Main {
         String password = scanner.next();
 
         boolean isLoggedIn =  bankSystem.login(username, password);
-        while (isLoggedIn){
-            bankSystem.performTask();
-            if (!bankSystem.logout())
-                isLoggedIn = false;
-        }
 
+        if (isLoggedIn) {
+            while(true) {
+                System.out.println("1. Check balance");
+                System.out.println("2. Deposit");
+                System.out.println("3. Withdraw");
+                System.out.println("4. Transfer");
+                System.out.println("5. Print Statement");
+                System.out.println("6. Logout");
+                System.out.print("Choice: ");
+
+                Scanner scanner = new Scanner(System.in);
+                byte choice = scanner.nextByte();
+                if (choice == 6){
+                    logout();
+                    break;
+                }
+                bankSystem.performTask(choice);
+            }
+        }
     }
 
     public static void logout() {

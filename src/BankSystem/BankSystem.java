@@ -46,10 +46,9 @@ public class BankSystem {
         }
     }
 
-    public boolean logout() {
+    public void logout() {
         currentUser = null;
         System.out.println("Logged out successfully!");
-        return true;
     }
 
     public User getCurrentUser() {
@@ -62,20 +61,9 @@ public class BankSystem {
         return null;
     }
 
-    public void performTask() {
-
-            System.out.println("1. Check balance");
-            System.out.println("2. Deposit");
-            System.out.println("3. Withdraw");
-            System.out.println("4. Transfer");
-            System.out.println("5. Print Statement");
-            System.out.println("6. Logout");
-            System.out.print("Choice: ");
-
-            Scanner scanner = new Scanner(System.in);
-            byte choice = scanner.nextByte();
-
-            BankAccount account = getAccountByNumber(currentUser.getAccounts().get(0).getAccountNumber());
+    public void performTask(byte choice) {
+        Scanner scanner = new Scanner(System.in);
+            BankAccount account = getAccountByNumber(currentUser.getAccounts().keySet().iterator().next());
             switch (choice) {
                 case 1:
                     var balance = account.getBalance();
@@ -93,9 +81,29 @@ public class BankSystem {
                     bankService.withdraw(account, amount);
                     break;
                 }
-                case 4:
-//                    bankService.transfer(account,account,amount);
-                    break;
+                case 4:{
+                    System.out.println("Destination username: ");
+                    String destinationUsername = scanner.next();
+
+                    System.out.print("Destination Account: ");
+                    String destinationAccountNumber = scanner.next();
+                    System.out.print("Amount to be transferred: ");
+                    double amount = scanner.nextDouble();
+
+                    User destinationUser = this.users.get(destinationUsername);
+                    if(destinationUser != null) {
+                        BankAccount destinationAccount = destinationUser.getAccount(destinationAccountNumber);
+                        if (destinationAccount != null) {
+                            bankService.transfer(account, destinationAccount, amount);
+                            System.out.println("Successfully transferred!");
+                        } else {
+                            System.out.println("Destination account is not found!");
+                        }
+                    } else {
+                        System.out.println("Destination user is not found!");
+                    }
+                        break;
+                }
                 case 5:
                     bankService.printStatement(account);
                     break;

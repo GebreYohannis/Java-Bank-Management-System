@@ -1,7 +1,7 @@
 package BankSystem.Users;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.Scanner;
 
 import BankSystem.Accounts.BankAccount;
@@ -12,12 +12,12 @@ import BankSystem.Exceptions.NegativeAmountException;
 public class User {
     private final String username;
     private final String password;
-    private final List<BankAccount> accounts;
+    private final Map<String,BankAccount> accounts;
 
     public User(String username, String password) {
         this.username = username;
         this.password = password;
-        this.accounts = new ArrayList<>();
+        this.accounts = new HashMap<>();
     }
 
     public String getUsername() {
@@ -28,20 +28,16 @@ public class User {
        return this.password.equals(password);
     }
 
-    public List<BankAccount> getAccounts() {
+    public Map<String,BankAccount> getAccounts() {
         return accounts;
     }
 
     public void addAccount(BankAccount account) {
-        this.accounts.add(account);
+        this.accounts.put(account.getAccountNumber(), account);
     }
 
     public BankAccount getAccount(String accountNumber) {
-        for(BankAccount account: accounts) {
-            if (account.getAccountNumber().equals(accountNumber))
-                return account;
-        }
-        return null;
+        return this.accounts.get(accountNumber);
     }
 
     public void createAccount(String accountNumber, double initialBalance) throws NegativeAmountException {
@@ -53,6 +49,7 @@ public class User {
         System.out.println("Account Type:");
         System.out.println("1. Checking");
         System.out.println("2. Saving");
+        System.out.print("Choice: ");
         int choice = scanner.nextInt();
 
         switch (choice) {
@@ -66,7 +63,7 @@ public class User {
                 return;
         }
 
-        this.accounts.add(account);
+        this.accounts.put(account.getAccountNumber(),account);
     }
 
 }
