@@ -82,7 +82,7 @@ public class BankSystem {
                     break;
                 }
                 case 4:{
-                    System.out.println("Destination username: ");
+                    System.out.print("Destination username: ");
                     String destinationUsername = scanner.next();
 
                     System.out.print("Destination Account: ");

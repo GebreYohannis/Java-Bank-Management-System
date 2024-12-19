@@ -13,9 +13,7 @@ public class Main {
             System.out.println("****** Bank System *****");
             System.out.println("1. Register");
             System.out.println("2. Login");
-            System.out.println("3. Check Account");
-            System.out.println("4. Exit");
-
+            System.out.println("3. Exit");
             System.out.print("Choice: ");
             int choice = scanner.nextInt();
 
@@ -32,9 +30,6 @@ public class Main {
                 login();
                 break;
             case 3:
-                checkAccount();
-                break;
-            case 4:
                 System.out.println("Exiting the system ....");
                 scanner.close();
                 return true;
@@ -93,21 +88,4 @@ public class Main {
     public static void logout() {
         bankSystem.logout();
     }
-
-    public static void checkAccount() {
-        User currentUser = bankSystem.getCurrentUser();
-        if (currentUser != null) {
-            System.out.print("Account Number: ");
-            String accountNumber = scanner.next();
-            var account = bankSystem.getAccountByNumber(accountNumber);
-            if (account != null)
-                System.out.println("Account found: " +
-                        account.getAccountNumber() + " is " +
-                        account.accountType() + " Account");
-
-            else System.out.println("Account  not found!");
-        } else
-            System.out.println("No user is logged in!");
-    }
-
 }
