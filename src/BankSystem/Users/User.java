@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 import BankSystem.Accounts.BankAccount;
-import BankSystem.Accounts.CheckingAAccount;
+import BankSystem.Accounts.CheckingAccount;
 import BankSystem.Accounts.SavingAccount;
 import BankSystem.Exceptions.NegativeAmountException;
 
@@ -54,7 +54,7 @@ public class User {
 
         switch (choice) {
             case 1:
-                account = new CheckingAAccount(accountNumber, initialBalance, 0);
+                account = new CheckingAccount(accountNumber, initialBalance, 0);
                 break;
             case 2:
                 account = new SavingAccount(accountNumber,initialBalance,0);

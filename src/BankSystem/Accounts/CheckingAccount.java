@@ -5,9 +5,9 @@ import BankSystem.Exceptions.NegativeAmountException;
 import BankSystem.Transactions.DepositTransaction;
 import BankSystem.Transactions.WithdrawTransaction;
 
-public class CheckingAAccount extends BankAccount{
+public class CheckingAccount extends BankAccount{
     private final double overdraftLimit;
-    public CheckingAAccount(String accountNumber, double initialBalance, double overdraftLimit) {
+    public CheckingAccount(String accountNumber, double initialBalance, double overdraftLimit) {
         super(accountNumber, initialBalance);
         this.overdraftLimit = overdraftLimit;
     }
